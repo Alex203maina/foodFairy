@@ -19,6 +19,21 @@ With the **Food Fairy** system, food distribution becomes more organized and eff
 4. **Log Donations**: Record the type of food, its quantity, and its donor for easy inventory management.
 5. **Handle Deliveries**: Track food deliveries from distribution centers to beneficiaries with real-time updates.
 
+
+### Tech Stack
+The Food Fairy system is built using the following technologies:
+
+- **Python**: The primary programming language used to build the backend of the application.
+
+- **Django**: A high-level Python web framework that facilitates rapid development and clean, pragmatic design. Django is used to manage the models, views, templates, and URL routing.
+
+- **MySQL**: A relational database management system used to store all application data, including information about donors, beneficiaries, donations, distribution centers, and deliveries.
+
+- **HTML/CSS/JavaScript**: For the frontend, used to create interactive and user-friendly web pages.
+
+- **Bootstrap**: A front-end framework used to ensure responsive, mobile-first design.
+
+
 ### Contact
 For any questions, suggestions, or contributions, please reach out:
 

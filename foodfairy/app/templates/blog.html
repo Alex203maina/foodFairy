@@ -1,0 +1,149 @@
+{% include 'layout.html'%}
+{% load static %}
+{% block title %} Blog {% endblock %}
+{% block body %}
+
+        <!-- Page Header Start -->
+        <div class="page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>From Blog</h2>
+                    </div>
+                    <div class="col-12">
+                        <a href="{% url 'app:home' %}}">Home</a>
+                        <a href="{% url 'app:blog' %}}">Blog</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page Header End -->
+        
+        
+        <!-- Blog Start -->
+        <div class="blog">
+            <div class="container">
+                <div class="section-header text-center">
+                    <p>Our Blog</p>
+                    <h2>Latest news & articles directly from our blog</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="blog-item">
+                            <div class="blog-img">
+                                <img src="{% static 'img/blog-1.jpg' %}" alt="Image">
+                            </div>
+                            <div class="blog-text">
+                                <h3><a href="#">5 Ways to Make a Positive Impact in Your Community</a></h3>
+                                <p>
+                                    Discover actionable steps to contribute positively to your community. From volunteering to supporting local businesses, small actions can make a big difference.
+                                </p>
+                            </div>
+                            <div class="blog-meta">
+                                <p><i class="fa fa-user"></i><a href="">Admin</a></p>
+                                <p><i class="fa fa-comments"></i><a href="">15 Comments</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="blog-item">
+                            <div class="blog-img">
+                                <img src="{% static 'img/blog-2.jpg' %}" alt="Image">
+                            </div>
+                            <div class="blog-text">
+                                <h3><a href="#">How to Support Local Charities Effectively</a></h3>
+                                <p>
+                                    Supporting local charities is one of the most rewarding ways to make an impact. Learn how to identify trustworthy organizations and how your support can bring about change.
+                                </p>
+                            </div>
+                            <div class="blog-meta">
+                                <p><i class="fa fa-user"></i><a href="">Admin</a></p>
+                                <p><i class="fa fa-comments"></i><a href="">10 Comments</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="blog-item">
+                            <div class="blog-img">
+                                <img src="{% static 'img/blog-3.jpg' %}" alt="Image">
+                            </div>
+                            <div class="blog-text">
+                                <h3><a href="#">The Importance of Education in Empowering Youth</a></h3>
+                                <p>
+                                    Education is a powerful tool for empowerment. In this post, we explore the significance of education and how it shapes the future of youth in underserved communities.
+                                </p>
+                            </div>
+                            <div class="blog-meta">
+                                <p><i class="fa fa-user"></i><a href="">Admin</a></p>
+                                <p><i class="fa fa-comments"></i><a href="">20 Comments</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="blog-item">
+                            <div class="blog-img">
+                                <img src="{% static 'img/blog-1.jpg' %}" alt="Image">
+                            </div>
+                            <div class="blog-text">
+                                <h3><a href="#">Creating Sustainable Change in Your Community</a></h3>
+                                <p>
+                                    Explore long-term solutions that go beyond temporary fixes. We discuss strategies to create sustainable change and lasting impact in your community.
+                                </p>
+                            </div>
+                            <div class="blog-meta">
+                                <p><i class="fa fa-user"></i><a href="">Admin</a></p>
+                                <p><i class="fa fa-comments"></i><a href="">8 Comments</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="blog-item">
+                            <div class="blog-img">
+                                <img src="{% static 'img/blog-2.jpg' %}" alt="Image">
+                            </div>
+                            <div class="blog-text">
+                                <h3><a href="#">The Power of Collective Action in Social Change</a></h3>
+                                <p>
+                                    When people come together with a shared vision, powerful things happen. Learn how collective action can drive social change and improve lives across communities.
+                                </p>
+                            </div>
+                            <div class="blog-meta">
+                                <p><i class="fa fa-user"></i><a href="">Admin</a></p>
+                                <p><i class="fa fa-comments"></i><a href="">5 Comments</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="blog-item">
+                            <div class="blog-img">
+                                <img src="{% static 'img/blog-3.jpg' %}" alt="Image">
+                            </div>
+                            <div class="blog-text">
+                                <h3><a href="#">Building a Culture of Giving and Volunteerism</a></h3>
+                                <p>
+                                    A culture of giving creates a stronger, more compassionate society. Discover ways to foster volunteerism and generosity in your community and beyond.
+                                </p>
+                            </div>
+                            <div class="blog-meta">
+                                <p><i class="fa fa-user"></i><a href="">Admin</a></p>
+                                <p><i class="fa fa-comments"></i><a href="">18 Comments</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Blog End -->
+
+{% endblock %}

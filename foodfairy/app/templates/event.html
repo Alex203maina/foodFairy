@@ -1,0 +1,112 @@
+{% include 'layout.html'%}
+{% load static %}
+{% block title %} Events {% endblock %}
+{% block body %}
+       
+        <!-- Page Header Start -->
+        <div class="page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Upcoming Events</h2>
+                    </div>
+                    <div class="col-12">
+                        <a href="">Home</a>
+                        <a href="">Events</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page Header End -->
+        
+        
+        <!-- Event Start -->
+        <div class="event">
+            <div class="container">
+                <div class="section-header text-center">
+                    <p>Upcoming Events</p>
+                    <h2>Be ready for our upcoming charity events</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="event-item">
+                            <img src="{% static 'img/event-1.jpg' %}" alt="Image">
+                            <div class="event-content">
+                                <div class="event-meta">
+                                    <p><i class="fa fa-calendar-alt"></i>01-Jan-45</p>
+                                    <p><i class="far fa-clock"></i>8:00 - 10:00</p>
+                                    <p><i class="fa fa-map-marker-alt"></i>New York</p>
+                                </div>
+                                <div class="event-text">
+                                    <h3>Community Charity Run</h3>
+                                    <p>
+                                        Join us for a fun-filled charity run through the streets of New York. All proceeds will go to local organizations supporting youth education. Don’t miss out on making a difference while enjoying the city’s scenic beauty.
+                                    </p>
+                                    <a class="btn btn-custom" href="">Join Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="event-item">
+                            <img src="{% static 'img/event-2.jpg' %}" alt="Image">
+                            <div class="event-content">
+                                <div class="event-meta">
+                                    <p><i class="fa fa-calendar-alt"></i>01-Jan-45</p>
+                                    <p><i class="far fa-clock"></i>8:00 - 10:00</p>
+                                    <p><i class="fa fa-map-marker-alt"></i>New York</p>
+                                </div>
+                                <div class="event-text">
+                                    <h3>Food Drive for the Homeless</h3>
+                                    <p>
+                                        Help us give back to the community by donating non-perishable foods to the homeless. Your contributions will make a big difference, and we need your support to help us reach our goal.
+                                    </p>
+                                    <a class="btn btn-custom" href="">Join Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="event-item">
+                            <img src="{% static 'img/event-1.jpg' %}" alt="Image">
+                            <div class="event-content">
+                                <div class="event-meta">
+                                    <p><i class="fa fa-calendar-alt"></i>01-Jan-45</p>
+                                    <p><i class="far fa-clock"></i>8:00 - 10:00</p>
+                                    <p><i class="fa fa-map-marker-alt"></i>New York</p>
+                                </div>
+                                <div class="event-text">
+                                    <h3>Eco-Friendly Awareness Campaign</h3>
+                                    <p>
+                                        Be part of an environmental movement. Join us as we organize activities aimed at raising awareness about sustainable living and eco-friendly practices in our local community.
+                                    </p>
+                                    <a class="btn btn-custom" href="">Join Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="event-item">
+                            <img src="{% static 'img/event-2.jpg' %}" alt="Image">
+                            <div class="event-content">
+                                <div class="event-meta">
+                                    <p><i class="fa fa-calendar-alt"></i>01-Jan-45</p>
+                                    <p><i class="far fa-clock"></i>8:00 - 10:00</p>
+                                    <p><i class="fa fa-map-marker-alt"></i>New York</p>
+                                </div>
+                                <div class="event-text">
+                                    <h3>Health and Wellness Fair</h3>
+                                    <p>
+                                        Experience a day dedicated to promoting better health with free consultations, wellness workshops, and fitness challenges. Whether you are looking to kickstart your fitness journey or just need some wellness tips, this event is for you.
+                                    </p>
+                                    <a class="btn btn-custom" href="">Join Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Event End -->
+
+{% endblock %}

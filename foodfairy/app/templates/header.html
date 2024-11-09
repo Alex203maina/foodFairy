@@ -1,0 +1,64 @@
+<!-- Top Bar Start -->
+<div class="top-bar d-none d-md-block">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="top-bar-left">
+                    <div class="text">
+                        <i class="fa fa-phone-alt"></i>
+                        <p>+254 798 630 435</p>
+                    </div>
+                    <div class="text">
+                        <i class="fa fa-envelope"></i>
+                        <p>alex203maina@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="top-bar-right">
+                    <div class="social">
+                        <a href=""><i class="fa-brands fa-x-twitter"></i>
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href=""><i class="fab fa-linkedin-in"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Top Bar End -->
+
+<!-- Nav Bar Start -->
+<div class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container-fluid">
+        <a href="/" class="navbar-brand">The FoodFairy</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav ml-auto">
+                <a href="{% url 'app:home' %}" class="nav-item nav-link {% if request.path == '' %}active{% endif %}">Home</a>
+                <a href="{% url 'app:about' %}" class="nav-item nav-link {% if 'about' in request.path %}active{% endif %}">About</a>
+                <a href="{% url 'app:event' %}" class="nav-item nav-link {% if 'event' in request.path %}active{% endif %}">Events</a>
+                <a href="{% url 'app:blog' %}" class="nav-item nav-link {% if 'blog' in request.path %}active{% endif %}">Blog</a>
+                
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                    <div class="dropdown-menu">
+                        <a href="single.html" class="dropdown-item">Detail Page</a>
+                        <a href="service.html" class="dropdown-item">What We Do</a>
+                        <a href="team.html" class="dropdown-item">Meet The Team</a>
+                        <a href="{%  url 'app:donate' %}" class="dropdown-item {% if 'donate' in request.path  %} active {% endif %}">Donate Now</a>
+                        <a href="volunteer.html" class="dropdown-item">Become A Volunteer</a>
+                    </div>
+                </div>
+                <a href="{% url 'app:contact' %}" class="nav-item nav-link {% if 'contact' in request.path  %} active {% endif %}">Contact</a>
+                <a href="{%  url 'app:login' %}" class="nav-item nav-link {% if 'login' in request.path  %} active {% endif %}">Login</a>
+                <a href="{%  url 'app:register' %}" class="nav-item nav-link {% if 'register' in request.path  %} active {% endif %}">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Nav Bar End -->
