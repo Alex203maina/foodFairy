@@ -33,6 +33,19 @@ The Food Fairy system is built using the following technologies:
 
 - **Bootstrap**: A front-end framework used to ensure responsive, mobile-first design.
 
+### Installation & Setup
+
+#### Prerequisites
+
+Before running the **Food Fairy** system, ensure you have the following installed:
+
+- Python
+
+- MySQL
+
+- Django
+
+- pip (Python's package installer)
 
 ### Contact
 For any questions, suggestions, or contributions, please reach out:
