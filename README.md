@@ -2,7 +2,10 @@
 
 ### Overview
 The **Food Fairy** is a food distribution management system developed to streamline the process of getting food to those in need. The system allows communities and organizations to efficiently manage food donations, track beneficiaries, and ensure the right food reaches the right people at the right time. It provides essential tools for tracking donations, managing distribution centers, and overseeing food deliveries.
-[![UI](home.png)](https://github.com/Alex203maina/foodFairy/blob/4668ef6ed4a8192cc36e3fb09cb8e54f20d48ee0/screenshot.png)
+
+
+![Alt text](https://github.com/Alex203maina/foodFairy/blob/61ea0914b58b54b810d08938b6d1366139c0b8f8/screenshot.png)
+
 
 
 ### Importance
