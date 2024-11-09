@@ -2,7 +2,7 @@
 
 ### Overview
 The **Food Fairy** is a food distribution management system developed to streamline the process of getting food to those in need. The system allows communities and organizations to efficiently manage food donations, track beneficiaries, and ensure the right food reaches the right people at the right time. It provides essential tools for tracking donations, managing distribution centers, and overseeing food deliveries.
-![UI](app/static/img/home.png)
+![UI](home.png)
 
 
 ### Importance
