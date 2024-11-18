@@ -1,0 +1,64 @@
+{% include 'layout.html'%}
+{% load static %}
+{% block title %} {% endblock %}
+{% block body %} 
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">My Donations</h2>
+
+    <!-- Card Deck for Donations -->
+    <div class="row">
+        <!-- Example Card (This would typically be dynamically generated from backend data) -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    Donation #1
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Food Type: Fruits</h5>
+                    <p class="card-text"><strong>Quantity:</strong> 100 kg</p>
+                    <p class="card-text"><strong>Shelf Life:</strong> 7 days</p>
+                    <p class="card-text"><strong>Perishable:</strong> Yes</p>
+                    <p class="card-text"><strong>Distribution Status:</strong> <span class="text-warning">Pending Approval</span></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    Donation #2
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Food Type: Vegetables</h5>
+                    <p class="card-text"><strong>Quantity:</strong> 50 kg</p>
+                    <p class="card-text"><strong>Shelf Life:</strong> 3 days</p>
+                    <p class="card-text"><strong>Perishable:</strong> Yes</p>
+                    <p class="card-text"><strong>Distribution Status:</strong> <span class="text-success">Distributed</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    Donation #3
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Food Type: Meals</h5>
+                    <p class="card-text"><strong>Quantity:</strong> 200 packs</p>
+                    <p class="card-text"><strong>Shelf Life:</strong> 1 day</p>
+                    <p class="card-text"><strong>Perishable:</strong> Yes</p>
+                    <p class="card-text"><strong>Distribution Status:</strong> <span class="text-danger">Not Yet Distributed</span></p>
+                </div>
+            </div>
+        </div>
+        <!-- End Example Cards -->
+    </div>
+
+    <!-- Optional Back Button -->
+    <div class="text-center mt-3">
+        <a href="donation_form.html" class="btn btn-secondary">Back to Donation Form</a>
+    </div>
+</div>
+{% endblock %}

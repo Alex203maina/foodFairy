@@ -15,4 +15,6 @@ urlpatterns = [
     path('signup/', views.register, name ='register'),
     path('event/', views.event, name = 'event'),
     path('blog/', views.blog, name = 'blog'),
+    path('make_donation/', views.makeDonation, name = 'makeDonation'),
+    path('my_donation/', views.myDonation, name = 'myDonation'),
 ]

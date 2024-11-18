@@ -28,3 +28,9 @@ def event(request):
     return render(request, 'event.html')
 def blog(request):
     return render(request, 'blog.html')
+
+def makeDonation(request):
+    return render(request, 'make_donation.html')
+
+def myDonation(request):
+    return render(request, 'my_donation.html')
