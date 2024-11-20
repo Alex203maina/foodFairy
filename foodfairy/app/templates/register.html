@@ -14,6 +14,7 @@
     }
     </style>
 <body class="main"> 
+    
 <div >
 
     <!-- Sign up form -->
@@ -21,11 +22,22 @@
         <div class="container">
             <div class="signup-content">
                 <div class="signup-form">
+                    <!-- Display error messages if any -->
+                    {% if messages %}
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %} 
                     <h2 class="form-title">Sign up</h2>
                     <form method="POST" class="register-form" id="register-form">
+                        {% csrf_token %}
                         <div class="form-group">
-                            <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                            <input type="text" name="name" id="name" placeholder="Your Name"/>
+                            <label for="name"><i class="zmdi zmdi-account material-icons-username"></i></label>
+                            <input type="text" name="username" id="username" placeholder="Your username"/>
                         </div>
                         <div class="form-group">
                             <label for="email"><i class="zmdi zmdi-email"></i></label>
@@ -37,11 +49,11 @@
                         </div>
                         <div class="form-group">
                             <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                            <input type="password" name="pass" id="pass" placeholder="Password"/>
+                            <input type="password1" name="password1" id="password1" placeholder="Password"/>
                         </div>
                         <div class="form-group">
                             <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                            <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                            <input type="password2" name="password2" id="password2" placeholder="Repeat your password"/>
                         </div>
                         <div class="form-group">
                             <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
@@ -59,6 +71,7 @@
             </div>
         </div>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </div>
 <body>

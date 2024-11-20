@@ -2,7 +2,22 @@
 {% load static %}
 {% block title %} {% endblock %}
 {% block body %}
-       
+       <!-- Page Header Start -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>About</h2>
+            </div>
+            <div class="col-12">
+                <a href="{% url 'app:home' %}">Home</a> &gt; 
+                <a href="{% url 'app:about' %}">About</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
         <!-- About Start -->
         <div class="about">
             <div class="container">

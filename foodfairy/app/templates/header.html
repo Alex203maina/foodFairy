@@ -1,3 +1,19 @@
+<style>
+    .profile-menu {
+        position: relative;
+        display: inline-block;
+    }
+    .profile-menu .dropdown-menu {
+        right: 0;
+        left: auto;
+    }
+    .profile-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+</style>
 <!-- Top Bar Start -->
 <div class="top-bar d-none d-md-block">
     <div class="container-fluid">
@@ -11,8 +27,9 @@
                     <div class="text">
                         <i class="fa fa-envelope"></i>
                         <p>alex203maina@gmail.com</p>
-                    </div>
+                        </div>
                 </div>
+                
             </div>
             <div class="col-md-4">
                 <div class="top-bar-right">
@@ -57,10 +74,28 @@
                     </div>
                 </div>
                 <a href="{% url 'app:contact' %}" class="nav-item nav-link {% if 'contact' in request.path  %} active {% endif %}">Contact</a>
+                {% if user.is_authenticated %}
+
+                <!-- Profile Dropdown -->
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{{ user.profile_pic.url }}" alt="User" class="profile-icon">
+                        <span class="ms-2">{{user.username }}</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item" href="/profile">View Profile</a></li>
+                        <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="{{'app:logout'}}">Logout</a></li>
+                    </ul>
+                </div>
+                {% else%}
                 <a href="{%  url 'app:login' %}" class="nav-item nav-link {% if 'login' in request.path  %} active {% endif %}">Login</a>
                 <a href="{%  url 'app:register' %}" class="nav-item nav-link {% if 'register' in request.path  %} active {% endif %}">Sign Up</a>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
 <!-- Nav Bar End -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>

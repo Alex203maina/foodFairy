@@ -2,6 +2,21 @@
 {% load static %}
 {% block title %} {% endblock %}
 {% block body %} 
+<!-- Page Header Start -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Make Donations</h2>
+            </div>
+            <div class="col-12">
+                <a href="{% url 'app:home' %}">Home</a> &gt; 
+                <a href="{% url 'app:makeDonation' %}">Make Donations</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
 
 <div class="container mt-5">
     <h2 class="text-center mb-4"> Donation Form</h2>
