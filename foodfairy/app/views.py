@@ -5,13 +5,17 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm, LoginForm
 # Create your views here.
-
+def login_required_redirect(request):
+    messages.warning(request, "Please log in or create an account to access this page.")
+    return redirect(f'/login/?next={request.path}')
 def home(request):
     return render(request, 'index.html')
 def about(request):
     return render(request, 'about.html')
 
-
+@login_required(login_url='/login')
+def profile(request):
+    return render(request, 'profile.html')
 def team(request):
     return render(request, 'team.html')
 
@@ -28,7 +32,7 @@ def event(request):
 def blog(request):
     return render(request, 'blog.html')
 
-@login_required(login_url='login')
+@login_required(login_url='/login')
 def makeDonation(request):
     return render(request, 'make_donation.html')
 
@@ -44,20 +48,25 @@ def myDonation(request):
     """
     return render(request, 'my_donation.html')
 
-
-def user_registration(request):  # sourcery skip: extract-method
-    form = RegistrationForm()
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            messages.success(request, 'You have singed up successfully.')
-            login(request, user)
-            return redirect('/')
-    return render(request, 'register.html', {'form': form})
-
+try:
+    def user_registration(request):  
+        form = RegistrationForm()
+        if request.method == 'POST':
+            form = RegistrationForm(request.POST)
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.username = user.username.lower()
+                user.save()
+                messages.success(request, 'You have signed up successfully.')
+                login(request, user)
+                return redirect('/')
+            else:
+                print(form.errors)  # Debug: Print form errors in case of invalid form
+                messages.error(request, 'Please correct the errors below.')
+        return render(request, 'register.html', {'form': form})
+except Exception as e:
+    print(f"Error during registration: {e}")
+    messages.error(request, 'An error occurred during registration. Please try again.')
 def login_user(request):
     if request.method != 'POST':
         return render (request, 'login.html')

@@ -59,7 +59,9 @@
                 <a href="{% url 'app:home' %}" class="nav-item nav-link {% if request.path == '/app/' %}active{% endif %}">Home</a>
                 <a href="{% url 'app:about' %}" class="nav-item nav-link {% if 'about' in request.path %}active{% endif %}">About</a>
                 <a href="{% url 'app:makeDonation' %}" class="nav-item nav-link {% if 'makeDonation' in request.path %}active{% endif %}">Donate</a>
+                {% if user.is_authenticated %}
                 <a href="{% url 'app:myDonation' %}" class="nav-item nav-link {% if 'myDonation' in request.path %}active{% endif %}">my Donation</a>
+                {% endif %}
                 <a href="{% url 'app:event' %}" class="nav-item nav-link {% if 'event' in request.path %}active{% endif %}">Events</a>
                 <a href="{% url 'app:blog' %}" class="nav-item nav-link {% if 'blog' in request.path %}active{% endif %}">Blog</a>
                 
@@ -86,7 +88,7 @@
                         <li><a class="dropdown-item" href="/profile">View Profile</a></li>
                         <li><a class="dropdown-item" href="/settings">Settings</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="{{'app:logout'}}">Logout</a></li>
+                        <li><a class="dropdown-item text-danger" href="/logout">Logout</a></li>
                     </ul>
                 </div>
                 {% else%}
