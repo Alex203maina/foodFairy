@@ -21,4 +21,6 @@ urlpatterns = [
     path('make_donation/', views.login_required_redirect, name='make_donation'),
     path('login-required/', views.login_required_redirect, name='login-required'),
     path('profile/', views.profile, name='profile'),
+    path('blog/<int:id>/', views.blog_detail, name='blog_detail'),
+
 ]

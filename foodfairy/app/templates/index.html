@@ -526,69 +526,42 @@
         <!-- Contact End -->
 
 
-        <!-- Blog Start -->
-        <div class="blog">
-            <div class="container">
-                <div class="section-header text-center">
-                    <p>Our Blog</p>
-                    <h2>Latest news & articles directly from our blog</h2>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <img src="{% static 'img/blog-1.jpg' %}" alt="Image">
-                            </div>
-                            <div class="blog-text">
-                                <h3><a href="#">How Volunteering Can Change Lives</a></h3>
-                                <p>
-                                    Volunteering is a powerful way to make a difference in your community. In this blog, we explore the life-changing impact of volunteering, not only for the people you help but also for your personal growth and development.
-                                </p>
-                            </div>
-                            <div class="blog-meta">
-                                <p><i class="fa fa-user"></i><a href="">Admin</a></p>
-                                <p><i class="fa fa-comments"></i><a href="">15 Comments</a></p>
-                            </div>
-                        </div>
+      <!-- Blog Start -->
+<div class="blog">
+    <div class="container">
+        <div class="section-header text-center">
+            <p>Our Blog</p>
+            <h2>Latest news & articles directly from our blog</h2>
+        </div>
+        <div class="row">
+            {% for blog in blogs %}
+            <div class="col-lg-4">
+                <div class="blog-item">
+                    <div class="blog-img">
+                        {% if blog.blog_image %}
+                        <img src="{{ blog.blog_image.url }}" alt="{{ blog.title }}" height="250px">
+                        {% else %}
+                        <img src="{% static 'path/to/default-image.jpg' %}" alt="Default Image">
+                        {% endif %}
                     </div>
-                    <div class="col-lg-4">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <img src="{% static 'img/blog-2.jpg' %}" alt="Image">
-                            </div>
-                            <div class="blog-text">
-                                <h3><a href="#">The Power of Giving: How Donations Save Lives</a></h3>
-                                <p>
-                                    Donations are the backbone of charitable organizations. Read about how your generous donations help provide food, shelter, and medical care to those in need, and how small contributions can lead to big changes.
-                                </p>
-                            </div>
-                            <div class="blog-meta">
-                                <p><i class="fa fa-user"></i><a href="">Admin</a></p>
-                                <p><i class="fa fa-comments"></i><a href="">8 Comments</a></p>
-                            </div>
-                        </div>
+                    <div class="blog-text">
+                        <h3><a href="/blog/{{blog.id}}">{{ blog.title }}</a></h3>
+                        <p>
+                            {{ blog.content|truncatechars:100 }}
+                        </p>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <img src="{% static 'img/blog-3.jpg' %}" alt="Image">
-                            </div>
-                            <div class="blog-text">
-                                <h3><a href="#">Upcoming Charity Events: What You Need to Know</a></h3>
-                                <p>
-                                    Our upcoming charity events are a great way to give back to the community. From food drives to fundraising galas, learn more about how you can get involved and support our mission to help those in need.
-                                </p>
-                            </div>
-                            <div class="blog-meta">
-                                <p><i class="fa fa-user"></i><a href="">Admin</a></p>
-                                <p><i class="fa fa-comments"></i><a href="">12 Comments</a></p>
-                            </div>
-                        </div>
+                    <div class="blog-meta">
+                        <p><i class="fa fa-user"></i> <a href="#">{{ blog.author }}</a></p>
+                        <p><i class="fa fa-calendar"></i> {{ blog.date|date:"F j, Y" }}</p>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        <!-- Blog End -->
+    </div>
+</div>
+<!-- Blog End -->
+
         
         <!-- Footer Start -->
         <div class="footer">

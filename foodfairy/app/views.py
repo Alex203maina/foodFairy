@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from .models import CustomUser
+from django.shortcuts import render, redirect,get_object_or_404
+from .models import CustomUser, BlogPost
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -9,7 +9,8 @@ def login_required_redirect(request):
     messages.warning(request, "Please log in or create an account to access this page.")
     return redirect(f'/login/?next={request.path}')
 def home(request):
-    return render(request, 'index.html')
+    blogs = BlogPost.objects.all()
+    return render(request, 'index.html',{'blogs':blogs})
 def about(request):
     return render(request, 'about.html')
 
@@ -31,7 +32,12 @@ def event(request):
     return render(request, 'event.html')
 def blog(request):
     return render(request, 'blog.html')
+def blog_detail(request, id):
+    # Use get_object_or_404 to fetch the blog post by ID
+    blog = get_object_or_404(BlogPost, id=id)
 
+    # Pass the blog object to the template context
+    return render(request, 'blog_detail.html', {'blog': blog})
 @login_required(login_url='/login')
 def makeDonation(request):
     return render(request, 'make_donation.html')
