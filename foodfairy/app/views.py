@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect,get_object_or_404
-from .models import CustomUser, BlogPost, Event, Event
+from .models import CustomUser, BlogPost, Event, Event, Contact
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -105,3 +105,19 @@ def logout_user(request):
     logout(request)
     return redirect('/')
 # Create your views here.
+
+def contact_us(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        
+        contact = Contact(name=name, email=email, subject=subject, message=message)
+        
+        contact.save()
+        
+        messages.success(request, 'Your message has been sent successfully.')
+        
+        return redirect('/contact')
+    return render(request, 'contact.html')

@@ -10,7 +10,7 @@ urlpatterns = [
     path('services/', views.service, name = 'service'),
     path('team/',views.team, name = 'team' ),
     path('donate/', views.donate, name = 'donate'),
-    path('contact/', views.contact, name = 'contact'  ),
+    path('contact/', views.contact, name ='contact'),
     path('login/', views.login_user, name = 'login'),
     path('signup/', views.user_registration, name ='register'),
     path('logout/', views.logout_user, name= 'logout'),
@@ -22,5 +22,6 @@ urlpatterns = [
     path('login-required/', views.login_required_redirect, name='login-required'),
     path('profile/', views.profile, name='profile'),
     path('blog/<int:id>/', views.blog_detail, name='blog_detail'),
+    path('contact/data', views.contact_us, name='contact_us'),
 
 ]
