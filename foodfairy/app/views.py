@@ -9,7 +9,7 @@ def login_required_redirect(request):
     messages.warning(request, "Please log in or create an account to access this page.")
     return redirect(f'/login/?next={request.path}')
 def home(request):
-    blogs = BlogPost.objects.all()
+    blogs = BlogPost.objects.all().order_by('-date')[:3]
     return render(request, 'index.html',{'blogs':blogs})
 def about(request):
     return render(request, 'about.html')
@@ -31,7 +31,8 @@ def contact(request):
 def event(request):
     return render(request, 'event.html')
 def blog(request):
-    return render(request, 'blog.html')
+    blogs = BlogPost.objects.all()
+    return render(request, 'blog.html', {'blogs':blogs})
 def blog_detail(request, id):
     # Use get_object_or_404 to fetch the blog post by ID
     blog = get_object_or_404(BlogPost, id=id)
