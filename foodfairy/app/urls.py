@@ -23,5 +23,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('blog/<int:id>/', views.blog_detail, name='blog_detail'),
     path('contact/data', views.contact_us, name='contact_us'),
+    path('volunteer/', views.volunteer, name='volunteer'),
+    path('volunteer/data', views.volunteer_info, name='volunteer')
 
 ]

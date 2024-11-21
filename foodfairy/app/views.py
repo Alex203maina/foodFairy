@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect,get_object_or_404
-from .models import CustomUser, BlogPost, Event, Event, Contact
+from .models import CustomUser, BlogPost, Event, Event, Contact, Volunteer
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -27,6 +27,8 @@ def service(request):
 def donate(request):
     return render(request, 'donate.html')
 
+def volunteer(request):
+    return render(request, 'volunteer.html')
 def contact(request):
     return render(request, 'contact.html')
 def event(request):
@@ -112,8 +114,9 @@ def contact_us(request):
         email = request.POST.get('email')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
+        phone = request.POST.get('phone_number')
         
-        contact = Contact(name=name, email=email, subject=subject, message=message)
+        contact = Contact(name=name, email=email, subject=subject, message=message, created_at=Contact.created_at)
         
         contact.save()
         
@@ -121,3 +124,20 @@ def contact_us(request):
         
         return redirect('/contact')
     return render(request, 'contact.html')
+
+def volunteer_info(request):
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        phone_number = request.POST.get('phone_number')
+        message = request.POST.get('message')
+        
+        volunteer = Volunteer(first_name=first_name, last_name=last_name, email=email, phone_number=phone_number, message=message)
+        
+        volunteer.save()
+        
+        messages.success(request, 'Your information has been submitted successfully.')
+        
+        return redirect('/volunteer')
+    return render(request, 'volunteer.html')

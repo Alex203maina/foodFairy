@@ -72,7 +72,7 @@
                         <a href="service.html" class="dropdown-item">What We Do</a>
                         <a href="{% url 'app:team' %}" class="dropdown-item">Meet The Team</a>
                         <a href="{%  url 'app:donate' %}" class="dropdown-item {% if 'donate' in request.path  %} active {% endif %}">Donate Now</a>
-                        <a href="volunteer.html" class="dropdown-item">Become A Volunteer</a>
+                        <a href="{% url 'app:volunteer'%}" class="dropdown-item">Become A Volunteer</a>
                     </div>
                 </div>
                 <a href="{% url 'app:contact' %}" class="nav-item nav-link {% if 'contact' in request.path  %} active {% endif %}">Contact</a>
