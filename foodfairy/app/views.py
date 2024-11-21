@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect,get_object_or_404
-from .models import CustomUser, BlogPost
+from .models import CustomUser, BlogPost, Event, Event
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -9,8 +9,9 @@ def login_required_redirect(request):
     messages.warning(request, "Please log in or create an account to access this page.")
     return redirect(f'/login/?next={request.path}')
 def home(request):
+    events = Event.objects.all().order_by('-date')[:2]
     blogs = BlogPost.objects.all().order_by('-date')[:3]
-    return render(request, 'index.html',{'blogs':blogs})
+    return render(request, 'index.html',{'blogs':blogs, 'events':events})
 def about(request):
     return render(request, 'about.html')
 
@@ -29,7 +30,8 @@ def donate(request):
 def contact(request):
     return render(request, 'contact.html')
 def event(request):
-    return render(request, 'event.html')
+    events = Event.objects.all()
+    return render(request, 'event.html', {'events': events})
 def blog(request):
     blogs = BlogPost.objects.all()
     return render(request, 'blog.html', {'blogs':blogs})

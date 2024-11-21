@@ -19,3 +19,44 @@ class BlogPost(models.Model):
     
     def __str__(self):
         return self.title
+    
+class Beneficiary(models.Model):   
+    full_name = models.CharField(max_length=255)
+    email = models.EmailField(unique=True, blank=True, null=True)
+    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    location = models.CharField(max_length=100,blank=True, null=True)
+    family_size = models.PositiveIntegerField(blank=True, null=True)
+    institution_size = models.PositiveIntegerField(blank=True, null=True)
+    beneficiary_type = models.CharField(max_length=100, choices=[
+        ('individual', 'Individual'),
+        ('family', 'Family'),
+        ('institution', 'Institution'),
+        ('community', 'Community'),
+    ])    
+    registration_date = models.DateField(auto_now_add=True)
+    status = models.CharField(max_length=50, choices=[
+        ('active', 'Active'),
+        ('inactive', 'Inactive'),
+        ('pending', 'Pending'),
+    ], default='active')
+    notes = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.full_name
+    class Meta:
+        verbose_name = 'Beneficiary'
+        verbose_name_plural = 'Beneficiaries'
+        ordering = ['full_name']
+        
+class Event(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True) 
+    date = models.DateField()
+    location = models.CharField(max_length=255)
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    event_image = models.ImageField(upload_to='events/')
+    
+    def __str__(self):
+        return self.location

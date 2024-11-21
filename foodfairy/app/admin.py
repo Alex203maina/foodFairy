@@ -1,9 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import  CustomUser, BlogPost
+from .models import  CustomUser, BlogPost, Beneficiary, Event
 
 
 
 # Register your models here.
 admin.site.register(CustomUser)
 admin.site.register(BlogPost)
+admin.site.register(Beneficiary)
+admin.site.register(Event)
