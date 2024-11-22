@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm, LoginForm
+from app.utils import send_registration_email
+
 # Create your views here.
 def login_required_redirect(request):
     messages.warning(request, "Please log in or create an account to access this page.")
@@ -66,6 +68,8 @@ try:
             form = RegistrationForm(request.POST)
             if form.is_valid():
                 user = form.save(commit=False)
+                # send the registration email to user
+                send_registration_email(user)
                 user.username = user.username.lower()
                 user.save()
                 messages.success(request, 'You have signed up successfully.')
@@ -97,7 +101,7 @@ def login_user(request):
 
     elif user.is_active:
         login(request, user)
-        messages.success(request, 'Logged in succesfully')
+        messages.success(request, 'Logged in successfully')
     else:
         messages.error(request, 'Please activate your account')
         return render (request, 'login.html')
