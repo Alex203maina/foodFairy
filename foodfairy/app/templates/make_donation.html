@@ -19,52 +19,52 @@
 <!-- Page Header End -->
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4"> Donation Form</h2>
-    <form>
-        <!-- Food Type ID (Auto-generated) -->
-        <div class="form-group d-none">
-            <label for="food_type_id">Food Type ID</label>
-            <input type="number" id="food_type_id" class="form-control" placeholder="Auto-generated ID" readonly >
+    <!-- Display error messages if any -->
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-
-        <!-- Food Type (Dropdown) -->
+    {% endfor %}
+{% endif %}
+    <h2 class="text-center mb-4">Donation Form</h2>
+    <form method="POST" action="{% url 'app:submit_donation' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <!-- Donation Type -->
         <div class="form-group">
-            <label for="type">Type of Donation</label>
-            <select id="type" class="form-control" required>
-                <option value="">Select donation Type</option>
-                <option value="fruits">Fruits</option>
-                <option value="vegetables">Vegetables</option>
-                <option value="meals">Meals</option>
-                <option value="cereals">Cereals</option>
-                <option value="Dairy-Products">Dairy Products</option>
-                <option value="Snacks">Snacks /Junk Foods</option>
-                <option value="Beverages">Beverages</option>
-                <option value="personal_care">Personal Care Items</option>
-                <!-- Add more options as needed -->
+            <label for="donation_type">Type of Donation</label>
+            <select id="donation_type" name="donation_type" class="form-control" required>
+                <option value="">Select Donation Type</option>
+                <option value="food">Food</option>
+                <option value="clothing">Clothing</option>
+                <option value="Money">Money</option>
+                <option value="other">Others</option>
             </select>
         </div>
 
-        <!-- Subcategory (Text Input) -->
+        <!-- Description -->
         <div class="form-group">
-            <label for="subcategory">Specify donation Subcategory</label>
-            <input type="text" id="subcategory" class="form-control" placeholder="e.g., Mango, Apple, etc.">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" class="form-control" rows="3" placeholder="Provide a brief description of the donation"></textarea>
         </div>
 
-        <!-- Capacity -->
+        <!-- Quantity -->
         <div class="form-group">
-            <label for="capacity">Quantity of donation Available</label>
-            <input type="number" id="capacity" class="form-control" placeholder="Enter quantity" required>
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" name="quantity" class="form-control" placeholder="Enter quantity" required>
         </div>
 
         <!-- Shelf Life -->
         <div class="form-group">
             <label for="shelf_life">Shelf Life (in days)</label>
-            <input type="number" id="shelf_life" class="form-control" placeholder="Enter shelf life" required>
+            <input type="number" id="shelf_life" name="shelf_life" class="form-control" placeholder="Enter shelf life" required>
         </div>
 
         <!-- Is Perishable -->
         <div class="form-group">
-            <label>Is the donation Perishable?</label>
+            <label>Is the Donation Perishable?</label>
             <div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="is_perishable" id="perishableYes" value="true" required>
@@ -75,18 +75,6 @@
                     <label class="form-check-label" for="perishableNo">No</label>
                 </div>
             </div>
-        </div>
-
-        <!-- Donor ID (Auto-generated) -->
-        <div class="form-group d-none">
-            <label for="donor_id">Donor ID</label>
-            <input type="number" id="donor_id" class="form-control" placeholder="Auto-generated Donor ID" readonly>
-        </div>
-
-        <!-- Is Distributed (Admin Only) -->
-        <div class="form-group d-none">
-            <label>Distribution Status</label>
-            <input type="text" class="form-control" value="Pending Approval by Admin" readonly>
         </div>
 
         <!-- Submit Button -->

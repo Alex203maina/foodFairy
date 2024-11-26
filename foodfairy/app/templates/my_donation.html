@@ -21,55 +21,44 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">My Donations</h2>
 
-    <!-- Card Deck for Donations -->
-    <div class="row">
-        <!-- Example Card (This would typically be dynamically generated from backend data) -->
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    Donation #1
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Food Type: Fruits</h5>
-                    <p class="card-text"><strong>Quantity:</strong> 100 kg</p>
-                    <p class="card-text"><strong>Shelf Life:</strong> 7 days</p>
-                    <p class="card-text"><strong>Perishable:</strong> Yes</p>
-                    <p class="card-text"><strong>Distribution Status:</strong> <span class="text-warning">Pending Approval</span></p>
-                </div>
+<!-- Card Deck for Donations -->
+<div class="row">
+    {% for donation in donations %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Donation #{{ forloop.counter }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Food Type: {{ donation.donation_type|title }}</h5>
+                <p class="card-text"><strong>Quantity:</strong> {{ donation.quantity }}</p>
+                <p class="card-text"><strong>Shelf Life:</strong> {{ donation.shelf_life }} days</p>
+                <p class="card-text"><strong>Perishable:</strong> {% if donation.is_perishable %}Yes{% else %}No{% endif %}</p>
+                <p class="card-text"><strong>Beneficiary:</strong> {% if donation.beneficiary %}{{ donation.beneficiary }}{% else %}Undisclosed{% endif %}</p>
+                <p class="card-text"><strong>Distribution Status:</strong> 
+                    {% if donation.is_distributed %}
+                        <span class="text-success">Distributed</span>
+                    {% else %}
+                        <span class="text-warning">Not Yet Distributed</span>
+                    {% endif %}
+                </p>
+                
+                <!-- Distribution Status -->
+                <p class="card-text">
+                    <strong>Status:</strong>
+                    {% if donation.status == 'pending' %}
+                    <span class="text-warning">Pending Approval</span>
+                    {% elif donation.status == 'received' %}
+                    <span class="text-success">Received</span>
+                    {% else %}
+                    <span class="text-danger">Not Yet Distributed</span>
+                    {% endif %}
+                </p>
             </div>
         </div>
-        
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    Donation #2
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Food Type: Vegetables</h5>
-                    <p class="card-text"><strong>Quantity:</strong> 50 kg</p>
-                    <p class="card-text"><strong>Shelf Life:</strong> 3 days</p>
-                    <p class="card-text"><strong>Perishable:</strong> Yes</p>
-                    <p class="card-text"><strong>Distribution Status:</strong> <span class="text-success">Distributed</span></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    Donation #3
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Food Type: Meals</h5>
-                    <p class="card-text"><strong>Quantity:</strong> 200 packs</p>
-                    <p class="card-text"><strong>Shelf Life:</strong> 1 day</p>
-                    <p class="card-text"><strong>Perishable:</strong> Yes</p>
-                    <p class="card-text"><strong>Distribution Status:</strong> <span class="text-danger">Not Yet Distributed</span></p>
-                </div>
-            </div>
-        </div>
-        <!-- End Example Cards -->
     </div>
+    {% endfor %}
+</div>
 
     <!-- Optional Back Button -->
     <div class="text-center mt-3">

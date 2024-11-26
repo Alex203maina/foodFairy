@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect,get_object_or_404
-from .models import CustomUser, BlogPost, Event, Event, Contact, Volunteer
+import requests
+from .models import CustomUser, BlogPost, Event, Event, Contact, Volunteer, Donate
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, LoginForm, DonationForm
 from app.utils import send_registration_email
 
 # Create your views here.
@@ -59,7 +60,9 @@ def myDonation(request):
     Returns:
     HttpResponse: The rendered 'my_donation.html' page.
     """
-    return render(request, 'my_donation.html')
+    donations = Donate.objects.filter(donor=request.user)
+
+    return render(request, 'my_donation.html', {'donations': donations})
 
 try:
     def user_registration(request):  
@@ -145,3 +148,23 @@ def volunteer_info(request):
         
         return redirect('/volunteer')
     return render(request, 'volunteer.html')
+
+def create_donation(request):
+    if request.method == "POST":
+        form = DonationForm(request.POST)
+        if form.is_valid():
+            # Set the donor to the currently logged-in user
+            donation = form.save(commit=False)  # Don't save yet, we need to add donor
+            donation.donor = request.user  # Associate the logged-in user as the donor
+            donation.save()  # Now save the donation to the database
+
+            # Add a success message (optional)
+            messages.success(request, 'Thank you for your donation!')
+
+            # Redirect to the 'mydonations' page
+            return redirect('/make_donation/') 
+        else:
+            return render(request, 'make_donation.html', {'form': form})  # Show form with errors
+    else:
+        form = DonationForm()  # Initialize the form
+        return render(request, 'make_donation.html', {'form': form})
