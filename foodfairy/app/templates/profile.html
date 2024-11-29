@@ -72,7 +72,7 @@
 <div class="col-md-3 border-right">
     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
         <!-- Display user profile picture, fall back to default image if not set -->
-        <img class="rounded-circle mt-5" width="150px" src="{{ user.profile_pic.url|default:'/static/img/default_user_image.png' }}">
+        <img class="rounded-circle mt-5" width="150px" src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}{% static 'img/default_user_image.png' %}{% endif %}">
 
         <span class="font-weight-bold">{{ user.first_name }} {{ user.last_name }}</span>
         <span class="text-black-50">{{ user.email }}</span>

@@ -5,7 +5,7 @@ from django.utils.timezone import now
 # Create your models here.
 class CustomUser(AbstractUser):
     phone_number = models.CharField(max_length=14, blank=True, null=True)
-    profile_pic = models.ImageField(upload_to='users/', default='users/default_user_image.png')
+    profile_pic = models.ImageField(upload_to='users/')
     organisation = models.CharField(max_length=100, blank=True, null=True)
     id_number = models.IntegerField(blank=True, null=True)
     nationality = models.CharField(max_length=100, blank=True, null=True)

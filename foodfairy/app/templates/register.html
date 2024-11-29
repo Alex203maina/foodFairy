@@ -31,25 +31,49 @@
                             {% endfor %}
                         </ul>
                     </div>
-                {% endif %} 
+                {% endif %}
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                            <li>
+                                <strong>{{ field|capfirst }}:</strong>
+                                {% for error in errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
                     <h2 class="form-title">Sign up</h2>
                     <form method="POST" class="register-form" id="register-form">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="name"><i class="zmdi zmdi-account material-icons-username"></i></label>
                             <input type="text" name="username" id="username" placeholder="Your username"/>
+                            {% if form.username.errors %}
+                            <small class="text-danger">{{ form.username.errors.0 }}</small>
+                        {% endif %}
                         </div>
                         <div class="form-group">
                             <label for="email"><i class="zmdi zmdi-email"></i></label>
                             <input type="email" name="email" id="email" placeholder="Your Email"/>
+                            {% if form.email.errors %}
+                            <small class="text-danger">{{ form.email.errors.0 }}</small>
+                        {% endif %}
                         </div>
                         <div class="form-group">
                             <label for="phone"><i class="zmdi zmdi-phone"></i></label>
-                            <input type="phone" name="phone" id="phone" placeholder="Your Phone"/>
+                            <input type="text" name="phone_number" id="phone_number" placeholder="Your Phone"/>
+                            {% if form.phone.errors %}
+                            <small class="text-danger">{{ form.phone_number.errors.0 }}</small>
+                        {% endif %}
                         </div>
                         <div class="form-group">
                             <label for="password1"><i class="zmdi zmdi-lock"></i></label>
                             <input type="password" name="password1" id="password1" placeholder="Password" required />
+                            
                         </div>
                         <div class="form-group">
                             <label for="password2"><i class="zmdi zmdi-lock-outline"></i></label>
