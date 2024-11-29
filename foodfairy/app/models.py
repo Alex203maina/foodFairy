@@ -5,7 +5,7 @@ from django.utils.timezone import now
 # Create your models here.
 class CustomUser(AbstractUser):
     phone_number = models.CharField(max_length=14, blank=True, null=True)
-    profile_pic = models.ImageField(upload_to='users/', default='users/profile.png')
+    profile_pic = models.ImageField(upload_to='users/', default='users/default_user_image.png')
     organisation = models.CharField(max_length=100, blank=True, null=True)
     id_number = models.IntegerField(blank=True, null=True)
     nationality = models.CharField(max_length=100, blank=True, null=True)
@@ -101,7 +101,8 @@ class Donate(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     is_distributed = models.BooleanField(default=False)
     is_perishable = models.BooleanField(default=False)
-    shelf_life = models.IntegerField()
+    shelf_life = models.IntegerField(blank=True, null=True)
+    unit =models.CharField(max_length=10)
     beneficiary = models.ForeignKey(
         'Beneficiary',
         on_delete=models.SET_NULL,

@@ -1,3 +1,4 @@
+{% load static %}
 <style>
     .profile-menu {
         position: relative;
@@ -81,7 +82,7 @@
                 <!-- Profile Dropdown -->
                 <div class="dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ user.profile_pic.url }}" alt="User" class="profile-icon">
+                        <img src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% else %}{% static 'img/default_user_image.png' %}{% endif %}" alt="User" class="profile-icon">
                         <span class="ms-2">{{user.username }}</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="profileDropdown">

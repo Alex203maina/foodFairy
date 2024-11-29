@@ -4,7 +4,7 @@ from .models import CustomUser, BlogPost, Event, Event, Contact, Volunteer, Dona
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from .forms import RegistrationForm, LoginForm, DonationForm
+from .forms import RegistrationForm, LoginForm, DonationForm,ProfileUpdateForm, ProfileImage
 from app.utils import send_registration_email
 
 # Create your views here.
@@ -168,3 +168,37 @@ def create_donation(request):
     else:
         form = DonationForm()  # Initialize the form
         return render(request, 'make_donation.html', {'form': form})
+    
+@login_required(login_url='/login')
+def update_profile(request):
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)  # Handle file upload
+        if form.is_valid():
+            user = form.save(commit=False)
+            # Handle password update
+            if form.cleaned_data.get('password'):
+                user.set_password(form.cleaned_data['password'])
+            user.save()
+            messages.success(request, 'Your profile has been updated successfully!')
+            return redirect('/profile')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = ProfileUpdateForm(instance=request.user)
+        
+    return render(request, 'profile.html', {'form': form})
+
+@login_required(login_url='/login')
+
+@login_required
+def update_image(request):
+    if request.method == 'POST':
+        # Handle the file upload
+        form = ProfileImage(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('/profile')  # Redirect to the updated profile page
+    else:
+        form = ProfileImage(instance=request.user)  # Pre-fill the form with the user's current profile
+
+    return render(request, 'update_profile.html', {'form': form})

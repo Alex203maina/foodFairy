@@ -26,5 +26,9 @@ urlpatterns = [
     path('volunteer/', views.volunteer, name='volunteer'),
     path('volunteer/data', views.volunteer_info, name='volunteer'),
     path('submit_donation/', views.create_donation, name='submit_donation'),
+    path('update_profile/', views.update_profile, name='update_donor_profile'),
+    path('update_image/', views.update_image, name='update_image'),
+
+
 
 ]

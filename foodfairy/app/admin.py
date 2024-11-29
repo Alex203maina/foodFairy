@@ -75,7 +75,6 @@ class DonateAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         # Check if status is 'pending' and is_distributed is True
         if obj.status == 'pending' and obj.is_distributed:
-            # Add a message instead of raising a validation error
             messages.warning(request, "Cannot mark as distributed while status is 'pending approval'.")
         else:
             # Save the model if validation passes

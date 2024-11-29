@@ -1,7 +1,7 @@
 {% include 'layout.html'%}
 {% load static %}
 {% block title %} {% endblock %}
-{% block body %} 
+{% block body %}
 <!-- Page Header Start -->
 <div class="page-header">
     <div class="container">
@@ -21,44 +21,49 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">My Donations</h2>
 
-<!-- Card Deck for Donations -->
-<div class="row">
-    {% for donation in donations %}
-    <div class="col-md-4 mb-4">
-        <div class="card">
-            <div class="card-header bg-primary text-white">
-                Donation #{{ forloop.counter }}
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Food Type: {{ donation.donation_type|title }}</h5>
-                <p class="card-text"><strong>Quantity:</strong> {{ donation.quantity }}</p>
-                <p class="card-text"><strong>Shelf Life:</strong> {{ donation.shelf_life }} days</p>
-                <p class="card-text"><strong>Perishable:</strong> {% if donation.is_perishable %}Yes{% else %}No{% endif %}</p>
-                <p class="card-text"><strong>Beneficiary:</strong> {% if donation.beneficiary %}{{ donation.beneficiary }}{% else %}Undisclosed{% endif %}</p>
-                <p class="card-text"><strong>Distribution Status:</strong> 
+    <!-- Bootstrap Table for Donations -->
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Food Type</th>
+                <th>Quantity</th>
+                <th>Shelf Life (days)</th>
+                <th>Perishable</th>
+                <th>Beneficiary</th>
+                <th>Distribution Status</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for donation in donations %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ donation.donation_type|title }}</td>
+                <td>{{ donation.quantity }} {{donation.unit}}</td>
+                <td>{{ donation.shelf_life }}</td>
+                <td>{% if donation.is_perishable %}Yes{% else %}No{% endif %}</td>
+                <td>{% if donation.beneficiary %}{{ donation.beneficiary }}{% else %}Undisclosed{% endif %}</td>
+                <td>
                     {% if donation.is_distributed %}
                         <span class="text-success">Distributed</span>
                     {% else %}
                         <span class="text-warning">Not Yet Distributed</span>
                     {% endif %}
-                </p>
-                
-                <!-- Distribution Status -->
-                <p class="card-text">
-                    <strong>Status:</strong>
+                </td>
+                <td>
                     {% if donation.status == 'pending' %}
-                    <span class="text-warning">Pending Approval</span>
+                        <span class="text-warning">Pending Approval</span>
                     {% elif donation.status == 'received' %}
-                    <span class="text-success">Received</span>
+                        <span class="text-success">Received</span>
                     {% else %}
-                    <span class="text-danger">Not Yet Distributed</span>
+                        <span class="text-danger">Not Yet Distributed</span>
                     {% endif %}
-                </p>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
     <!-- Optional Back Button -->
     <div class="text-center mt-3">
