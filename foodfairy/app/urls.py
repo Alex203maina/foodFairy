@@ -28,6 +28,10 @@ urlpatterns = [
     path('submit_donation/', views.create_donation, name='submit_donation'),
     path('update_profile/', views.update_profile, name='update_donor_profile'),
     path('update_image/', views.update_image, name='update_image'),
+    path('delete_account/', views.delete_account, name='delete_account'),
+    path('settings/', views.profile_settings, name='profile_settings'),
+
+
 
 
 

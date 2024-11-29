@@ -9,6 +9,8 @@ class CustomUser(AbstractUser):
     organisation = models.CharField(max_length=100, blank=True, null=True)
     id_number = models.IntegerField(blank=True, null=True)
     nationality = models.CharField(max_length=100, blank=True, null=True)
+    dark_mode = models.BooleanField(default=False)
+
 
 # blog post
 class BlogPost(models.Model):
@@ -162,3 +164,18 @@ class DistributionCenter(models.Model):
             raise ValueError("Cannot remove stock.Not enough Inventory quantity")
         self.current_stock -= quantity
         self.save()
+class SocialHandler(models.Model):
+    email = models.EmailField()
+    phone = models.CharField(max_length=100)
+    twitter = models.URLField()
+    instagram = models.URLField()
+    facebook = models.URLField()
+    linkedin = models.URLField()
+    youtube = models.URLField()
+    
+    class Meta:
+        verbose_name = "Social Handler"
+        verbose_name_plural = "Social Handlers"
+
+    def __str__(self):
+        return f"Social handler for {self.email if self.email else 'Unknown'}"

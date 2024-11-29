@@ -23,11 +23,11 @@
                 <div class="top-bar-left">
                     <div class="text">
                         <i class="fa fa-phone-alt"></i>
-                        <p>+254 798 630 435</p>
+                        <p>{{socials.phone }}</p>
                     </div>
                     <div class="text">
                         <i class="fa fa-envelope"></i>
-                        <p>alex203maina@gmail.com</p>
+                        <p>{{ socials.email }}</p>
                         </div>
                 </div>
                 
@@ -35,10 +35,10 @@
             <div class="col-md-4">
                 <div class="top-bar-right">
                     <div class="social">
-                        <a href=""><i class="fa-brands fa-x-twitter"></i>
-                        <a href=""><i class="fab fa-facebook-f"></i></a>
-                        <a href=""><i class="fab fa-linkedin-in"></i></a>
-                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href="{{ socials.twitter }}" target="_blank"><i class="fa-brands fa-x-twitter"></i>
+                        <a href="{{ socials.facebook }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="{{ socials.linkedin }}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="{{ socials.instagram }}" target="_blank"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>

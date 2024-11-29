@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib import messages
-from .models import CustomUser, BlogPost, Beneficiary, Event, Contact,Volunteer,Donate,DistributionCenter
+from .models import CustomUser, BlogPost, Beneficiary, Event, Contact,Volunteer,Donate,DistributionCenter,SocialHandler
 
+admin.site.register(SocialHandler)
 # Customizing the display of CustomUser in the admin panel
 class CustomUserAdmin(UserAdmin):
     list_display = ('username', 'email', 'is_superuser', 'is_active', 'date_joined')  

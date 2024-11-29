@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings Page</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .delete-account {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Settings</h2>
+    
+    <form id="settings-form">
+        <div class="form-group">
+            <label for="dark-mode">Enable Dark Mode:</label>
+            <input type="checkbox" id="dark-mode" name="dark-mode">
+        </div>
+
+        <div class="form-group">
+            <button type="button" onclick="saveSettings()">Save Settings</button>
+        </div>
+
+        <div class="delete-account">
+            <h3>Delete Account</h3>
+            <p>If you wish to delete your account, please click the button below.</p>
+            <button type="button" onclick="deleteAccount()" style="background-color: red;">Delete Account</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function saveSettings() {
+        const darkModeEnabled = document.getElementById('dark-mode').checked;
+        
+        // Logic to save settings (e.g., send to server)
+        console.log('Dark Mode:', darkModeEnabled);
+        
+        alert('Settings saved successfully!');
+    }
+
+    function deleteAccount() {
+        if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+            // Logic to delete the account (e.g., send request to server)
+            console.log('Account deleted');
+            
+            alert('Your account has been deleted.');
+        }
+    }
+</script>
+
+</body>
+</html>

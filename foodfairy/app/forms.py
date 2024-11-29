@@ -25,6 +25,8 @@ class DonationForm(forms.ModelForm):
         model = Donate
         fields = ['donation_type', 'description', 'quantity', 'is_perishable', 'shelf_life','unit']
 class ProfileUpdateForm(forms.ModelForm):
+    dark_mode = forms.BooleanField(required=False, initial=False)
+
     confirm_password = forms.CharField(
         widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}),
         required=False
@@ -36,7 +38,7 @@ class ProfileUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['first_name','last_name','username', 'email', 'profile_pic', 'organisation', 'phone_number', 'id_number', 'nationality', 'password']
+        fields = ['first_name','last_name','username', 'email', 'profile_pic', 'organisation', 'phone_number', 'id_number', 'nationality', 'password','dark_mode']
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -56,6 +58,8 @@ class ProfileUpdateForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
+        user.dark_mode = self.cleaned_data.get('dark_mode')
+
         password = self.cleaned_data.get('password')
 
         if password:  # Only set the password if it's not empty

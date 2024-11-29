@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect,get_object_or_404
 import requests
-from .models import CustomUser, BlogPost, Event, Event, Contact, Volunteer, Donate
+from .models import CustomUser, BlogPost, Event, Event, Contact, Volunteer, Donate,SocialHandler
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -14,7 +14,8 @@ def login_required_redirect(request):
 def home(request):
     events = Event.objects.all().order_by('-date')[:2]
     blogs = BlogPost.objects.all().order_by('-date')[:3]
-    return render(request, 'index.html',{'blogs':blogs, 'events':events})
+    socials = SocialHandler.objects.first()
+    return render(request, 'index.html',{'blogs':blogs, 'events':events, 'socials':socials})
 def about(request):
     return render(request, 'about.html')
 
@@ -202,3 +203,18 @@ def update_image(request):
         form = ProfileImage(instance=request.user)  # Pre-fill the form with the user's current profile
 
     return render(request, 'update_profile.html', {'form': form})
+@login_required
+def delete_account(request):
+    user = request.user
+    user.delete()  # This deletes the user's account from the database
+    logout(request)  # Log the user out
+    return redirect('home')  # Redirect to the home page
+@login_required
+def profile_settings(request):
+    if request.method == "POST":
+        user = request.user
+        # Save the dark mode preference
+        user.dark_mode = request.POST.get('dark_mode') == 'on'
+        user.save()
+
+    return render(request, 'settings.html', {'user': request.user})
