@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect,get_object_or_404
 import requests
-from .models import CustomUser, BlogPost, Event, Event, Contact, Volunteer, Donate,SocialHandler
+from .models import CustomUser, BlogPost, Event, Event, Contact, Volunteer, Donate,SocialHandler,TeamMember
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -15,7 +15,9 @@ def home(request):
     events = Event.objects.all().order_by('-date')[:2]
     blogs = BlogPost.objects.all().order_by('-date')[:3]
     socials = SocialHandler.objects.first()
-    return render(request, 'index.html',{'blogs':blogs, 'events':events, 'socials':socials})
+    team_members = TeamMember.objects.all().order_by('-created_at')[:4]
+
+    return render(request, 'index.html',{'blogs':blogs, 'events':events, 'socials':socials, 'team_members':team_members})
 def about(request):
     return render(request, 'about.html')
 
@@ -23,7 +25,8 @@ def about(request):
 def profile(request):
     return render(request, 'profile.html')
 def team(request):
-    return render(request, 'team.html')
+    team_members = TeamMember.objects.all()
+    return render(request, 'team.html',{'team_members':team_members})
 
 def service(request):
     return render(request, 'service.html')
@@ -62,30 +65,28 @@ def myDonation(request):
     HttpResponse: The rendered 'my_donation.html' page.
     """
     donations = Donate.objects.filter(donor=request.user)
+    
 
     return render(request, 'my_donation.html', {'donations': donations})
 
-try:
-    def user_registration(request):  
-        form = RegistrationForm()
-        if request.method == 'POST':
-            form = RegistrationForm(request.POST)
-            if form.is_valid():
-                user = form.save(commit=False)
-                # send the registration email to user
-                send_registration_email(user)
-                user.username = user.username.lower()
-                user.save()
-                messages.success(request, 'You have signed up successfully.')
-                login(request, user)
-                return redirect('/')
-            else:
-                print(form.errors)  # Debug: Print form errors in case of invalid form
-                messages.error(request, 'Please correct the errors below.')
-        return render(request, 'register.html', {'form': form})
-except Exception as e:
-    print(f"Error during registration: {e}")
-    messages.error(request, 'An error occurred during registration. Please try again.')
+
+def user_registration(request):  
+    form = RegistrationForm()
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            # send the registration email to user
+            send_registration_email(user)
+            user.username = user.username.lower()
+            user.save()
+            messages.success(request, 'You have signed up successfully.')
+            login(request, user)
+            return redirect('/')
+        else:
+            print(form.errors)  # Debug: Print form errors in case of invalid form
+            messages.error(request, 'Please correct the errors below.')
+    return render(request, 'register.html', {'form': form})
 def login_user(request):
     if request.method != 'POST':
         return render (request, 'login.html')
@@ -93,6 +94,7 @@ def login_user(request):
     password = request.POST.get('password')
     try:
         user= CustomUser.objects.get(username=username)
+        print(user)
         # user.set_password(password)
     except CustomUser.DoesNotExist:
         messages.error(request, 'username does not exist!')
@@ -173,12 +175,13 @@ def create_donation(request):
 @login_required(login_url='/login')
 def update_profile(request):
     if request.method == 'POST':
-        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)  # Handle file upload
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user) 
         if form.is_valid():
             user = form.save(commit=False)
             # Handle password update
-            if form.cleaned_data.get('password'):
-                user.set_password(form.cleaned_data['password'])
+            password = request.POST.get('password')
+            if len(password) > 3:
+                user.set_password(password)
             user.save()
             messages.success(request, 'Your profile has been updated successfully!')
             return redirect('/profile')
@@ -198,6 +201,7 @@ def update_image(request):
         form = ProfileImage(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Your profile image has been updated successfully!')
             return redirect('/profile')  # Redirect to the updated profile page
     else:
         form = ProfileImage(instance=request.user)  # Pre-fill the form with the user's current profile

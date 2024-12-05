@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib import messages
-from .models import CustomUser, BlogPost, Beneficiary, Event, Contact,Volunteer,Donate,DistributionCenter,SocialHandler
+from .models import CustomUser, BlogPost, Beneficiary, Event, Contact,Volunteer,Donate,DistributionCenter,SocialHandler,TeamMember
 
 admin.site.register(SocialHandler)
 # Customizing the display of CustomUser in the admin panel
@@ -82,3 +82,12 @@ class DonateAdmin(admin.ModelAdmin):
             super().save_model(request, obj, form, change)
 
 admin.site.register(Donate, DonateAdmin)
+
+class TeamMemberAdmin(admin.ModelAdmin):
+    list_display = ('name', 'role', 'email', 'created_at')
+    list_filter = ('created_at',)
+    
+    search_fields = ('name', 'email')
+    
+admin.site.register(TeamMember, TeamMemberAdmin)
+    
