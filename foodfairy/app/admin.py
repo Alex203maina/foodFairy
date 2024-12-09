@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib import messages
-from .models import CustomUser, BlogPost, Beneficiary, Event, Contact,Volunteer,Donate,DistributionCenter,SocialHandler,TeamMember
+from .models import CustomUser, BlogPost, Beneficiary, Event, Contact,Volunteer,Donate,DistributionCenter,SocialHandler,TeamMember,EventRegistration,EventImage
 
 admin.site.register(SocialHandler)
 # Customizing the display of CustomUser in the admin panel
@@ -30,6 +30,29 @@ admin.site.register(CustomUser, CustomUserAdmin)
 # Registering the other models
 admin.site.register(Event)
 
+
+class EventRegistrationAdmin(admin.ModelAdmin):
+    # Fields to display in the list view
+    list_display = ('name', 'email', 'phone', 'event', 'created_at', 'updated_at')
+    
+    # Adding search functionality for name, email, and event title
+    search_fields = ('name', 'email', 'event__title')  # 'event__title' will allow searching by event title
+    
+    # Adding filters for event and registration date
+    list_filter = ('event', 'created_at')
+
+    # Adding a custom filter for counting registrations per event
+    def count_registrations(self, obj):
+        return EventRegistration.objects.filter(event=obj.event).count()
+
+    # Adding the custom count field in the admin interface
+    count_registrations.short_description = 'Number of Registrations'
+    
+    # Adding the count_registrations method in list_display
+    list_display = ('name', 'email', 'phone', 'event', 'count_registrations', 'created_at', 'updated_at')
+
+# Register the custom admin interface
+admin.site.register(EventRegistration, EventRegistrationAdmin)
 
 class DistributionCenterAdmin(admin.ModelAdmin):
     list_display = ('name', 'location','capacity','contact_phone')
@@ -90,4 +113,10 @@ class TeamMemberAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email')
     
 admin.site.register(TeamMember, TeamMemberAdmin)
+
+class EventImageAdmin(admin.ModelAdmin):
+    list_display = ('event', 'caption', 'uploaded_at')
+    list_filter = ('event', 'uploaded_at')
+    search_fields = ('event__title', 'caption')
+admin.site.register(EventImage, EventImageAdmin)
     

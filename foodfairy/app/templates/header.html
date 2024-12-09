@@ -69,8 +69,8 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu">
-                        <a href="single.html" class="dropdown-item">Detail Page</a>
-                        <a href="service.html" class="dropdown-item">What We Do</a>
+                        <a href="{% url 'app:gallery' %}" class="dropdown-item">Gallery</a>
+                        <a href="{%url 'app:service'%}" class="dropdown-item">What We Do</a>
                         <a href="{% url 'app:team' %}" class="dropdown-item">Meet The Team</a>
                         <a href="{%  url 'app:donate' %}" class="dropdown-item {% if 'donate' in request.path  %} active {% endif %}">Donate Now</a>
                         <a href="{% url 'app:volunteer'%}" class="dropdown-item">Become A Volunteer</a>

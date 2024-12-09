@@ -1,5 +1,5 @@
 # from django.contrib.auth.models import User
-from .models import CustomUser as User, Donate
+from .models import CustomUser as User, Donate,EventRegistration
 from django import forms
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
@@ -19,7 +19,11 @@ class LoginForm(forms.Form):
     username = forms.CharField(max_length=65)
     password = forms.CharField(max_length=65, widget=forms.PasswordInput)
     
-    
+class EventRegistrationForm(forms.ModelForm):
+    class Meta:
+        model = EventRegistration
+        fields = ['name', 'email', 'phone']
+        
 class DonationForm(forms.ModelForm):
     class Meta:
         model = Donate

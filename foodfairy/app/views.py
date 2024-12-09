@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect,get_object_or_404
 import requests
-from .models import CustomUser, BlogPost, Event, Event, Contact, Volunteer, Donate,SocialHandler,TeamMember
+from .models import CustomUser, BlogPost, Event, Event, Contact, Volunteer, Donate,SocialHandler,TeamMember,EventRegistration,EventImage
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from .forms import RegistrationForm, LoginForm, DonationForm,ProfileUpdateForm, ProfileImage
+from .forms import RegistrationForm, LoginForm, DonationForm,ProfileUpdateForm, ProfileImage, EventRegistrationForm
 from app.utils import send_registration_email
 
 # Create your views here.
@@ -175,21 +175,34 @@ def create_donation(request):
 @login_required(login_url='/login')
 def update_profile(request):
     if request.method == 'POST':
-        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user) 
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             user = form.save(commit=False)
-            # Handle password update
+            
+            # Handle optional password update
             password = request.POST.get('password')
-            if len(password) > 3:
-                user.set_password(password)
+            confirm_password = request.POST.get('confirm_password')
+            
+            if password or confirm_password:  # Only check if either field is provided
+                if password == confirm_password:
+                    if len(password) > 3:  # Basic length validation
+                        user.set_password(password)
+                        messages.success(request, "Password updated successfully!")
+                    else:
+                        messages.error(request, "Password must be longer than 3 characters.")
+                        return redirect('/profile')
+                else:
+                    messages.error(request, "Passwords do not match.")
+                    return redirect('/profile')
+            
             user.save()
-            messages.success(request, 'Your profile has been updated successfully!')
+            messages.success(request, "Profile updated successfully!")
             return redirect('/profile')
         else:
             messages.error(request, 'Please correct the errors below.')
     else:
         form = ProfileUpdateForm(instance=request.user)
-        
+    
     return render(request, 'profile.html', {'form': form})
 
 @login_required(login_url='/login')
@@ -209,10 +222,14 @@ def update_image(request):
     return render(request, 'update_profile.html', {'form': form})
 @login_required
 def delete_account(request):
-    user = request.user
-    user.delete()  # This deletes the user's account from the database
-    logout(request)  # Log the user out
-    return redirect('home')  # Redirect to the home page
+    if request.method == 'POST':  
+        user = request.user
+        user.delete() 
+        logout(request)
+        messages.success(request, "Your account has been deleted successfully.")
+        return redirect('app:home') 
+
+    return render(request, 'settings.html') 
 @login_required
 def profile_settings(request):
     if request.method == "POST":
@@ -222,3 +239,25 @@ def profile_settings(request):
         user.save()
 
     return render(request, 'settings.html', {'user': request.user})
+
+
+def event_registration(request, event_id):
+    event = get_object_or_404(Event, id=event_id)  # Fetch the specific event
+    if request.method == 'POST':
+        print(request.POST)
+        form = EventRegistrationForm(request.POST)
+        if form.is_valid():
+            registration = form.save(commit=False)
+            registration.event = event  # Associate the event with the registration
+            registration.save()
+            messages.success(request, 'You have successfully registered for the event!')
+            return redirect('app:home')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = EventRegistrationForm()
+    return render(request, 'event_registration.html', {'form': form, 'event': event})
+
+def gallery(request):
+    images = EventImage.objects.all()
+    return render(request, 'gallery.html', {'images': images})

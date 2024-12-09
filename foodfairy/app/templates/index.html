@@ -20,7 +20,7 @@
                                  surplus and those in need. Together, we can make every meal count 
                                  and reduce food waste in our communities.                            </p>
                             <div class="carousel-btn">
-                                <a class="btn btn-custom" href="">Donate Now</a>
+                                <a class="btn btn-custom" href="{%  url 'app:makeDonation' %}">Donate Now</a>
                                 <a class="btn btn-custom btn-play" data-toggle="modal" data-src="https://www.youtube.com/embed/CiFoHm7HD94" data-target="#videoModal">Watch Video</a>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                             <p>
                                 Together, we can turn every donation into a reason to smile. By providing food to families and communities, we’re not just filling plates—we’re bringing hope, joy, and a brighter future to millions.                            </p>
                             <div class="carousel-btn">
-                                <a class="btn btn-custom" href="">Donate Now</a>
+                                <a class="btn btn-custom" href="{%  url 'app:makeDonation' %}">Donate Now</a>
                                     <a class="btn btn-custom btn-play" data-toggle="modal" data-src="https://www.youtube.com/embed/CiFoHm7HD94" data-target="#videoModal">Watch Video</a>                            </div>
                         </div>
                     </div>
@@ -330,7 +330,7 @@
                                     <p>
                                         {{event.description}}
                                     </p>
-                                    <a class="btn btn-custom" href="">Join Now</a>
+                                    <a class="btn btn-custom" href="{% url 'app:event_registration' event.id %}">Join Now</a>
                                 </div>
                             </div>
                         </div>

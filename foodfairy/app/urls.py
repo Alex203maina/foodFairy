@@ -30,6 +30,9 @@ urlpatterns = [
     path('update_image/', views.update_image, name='update_image'),
     path('delete_account/', views.delete_account, name='delete_account'),
     path('settings/', views.profile_settings, name='profile_settings'),
+    path('event_registration/<int:event_id>/', views.event_registration, name='event_registration'),
+    path('gallery/', views.gallery, name='gallery'),
+
 
 
 

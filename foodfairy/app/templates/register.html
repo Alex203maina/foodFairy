@@ -27,6 +27,7 @@
                     <div class="alert alert-danger">
                         <ul class="mb-0">
                             {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
                                 <li>{{ message }}</li>
                             {% endfor %}
                         </ul>
@@ -90,7 +91,7 @@
                 </div>
                 <div class="signup-image">
                     <figure><img src="{% static 'img/signup-image.jpg' %}" alt="sing up image"></figure>
-                    <a href="#" class="signup-image-link">I am already member</a>
+                    <a href="{% url 'app:login' %}" class="signup-image-link">I am already member</a>
                 </div>
             </div>
         </div>
